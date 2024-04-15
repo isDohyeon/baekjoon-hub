@@ -14,17 +14,7 @@ public class Main
         {
             if (A > B)
                 break;
-            if (B % 10 == 1)
-            {
-                B = (B - 1) / 10;
-            }
             else if (B % 2 == 0)
-            {
-                B /= 2;
-            }
-            else
-                break;
-            /*if (B % 2 == 0)
             {
                 B /= 2;
             }
@@ -33,7 +23,7 @@ public class Main
                 B = (B - 1) / 10;
             }
             else
-                break; */
+                break;
 
             count++;
         }
