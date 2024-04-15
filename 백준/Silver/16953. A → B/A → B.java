@@ -13,11 +13,18 @@ public class Main
         while (A != B)
         {
             if (A > B)
-            {
-                count = -1;
                 break;
+            if (B % 10 == 1)
+            {
+                B = (B - 1) / 10;
             }
-            if (B % 2 == 0)
+            else if (B % 2 == 0)
+            {
+                B /= 2;
+            }
+            else
+                break;
+            /*if (B % 2 == 0)
             {
                 B /= 2;
             }
@@ -26,12 +33,10 @@ public class Main
                 B = (B - 1) / 10;
             }
             else
-            {
-                count = -1;
-                break;
-            }
+                break; */
+
             count++;
         }
-        System.out.print(count);
+        System.out.print(A == B ? count : -1);
     }
 }
