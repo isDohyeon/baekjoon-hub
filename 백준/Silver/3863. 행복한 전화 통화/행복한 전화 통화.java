@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static int[] solution(int[] start, int[] des, int[] tapStart, int[] tapDur, int N, int M) {
+    public static int[] solution(int[] callStart, int[] callEnd, int[] tapStart, int[] tapEnd, int N, int M) {
         int[] answer = new int[M];
-
+        // 도청 시간대가 겹치는지 확인
         for (int i = 0; i < M; i++) {
             int count = 0;
             for (int j = 0; j < N; j++) {
-                if (tapStart[i] < (start[j] + des[j]) && (tapStart[i] + tapDur[i]) > start[j]) {
+                // 도청 시작 시간 < 전화 끝나는 시간 && 도청 끝나는 시간 > 전화 시작 시간이면 도청 성공한 것
+                if ((tapStart[i] < callEnd[j]) && (tapEnd[i] > callStart[j])) {
                     count += 1;
                 }
             }
@@ -20,45 +21,45 @@ public class Main {
         }
         return answer;
     }
+
     public static void main(String[] args) throws IOException {
         // 버퍼를 사용하여 입력받기
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        // 입력값 토큰화 객체 (공백 기준 분리)
+        StringTokenizer st;
+        
         while (true) {
-            String nm = br.readLine();
-            StringTokenizer nmToken = new StringTokenizer(nm, " ");
-            // 1. 정수 N과 M입력
-            int N = Integer.parseInt(nmToken.nextToken()); // 전화통화 횟수
-            int M = Integer.parseInt(nmToken.nextToken()); // 도청 횟수
+            // 1. N, M 입력
+            st = new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
+
             if (N == 0 && M == 0) {
                 break;
             }
 
-            int[] source = new int[N];
-            int[] dest = new int[N];
-            int[] start = new int[N];
-            int[] dur = new int[N];
             // 2. Source, Destination, Start, Duration 입력
+            int[] callStart = new int[N];
+            int[] callEnd = new int[N];
             for (int i = 0; i < N; i++) {
-                String call = br.readLine();
-                StringTokenizer callToken = new StringTokenizer(call, " ");
-
-                source[i] = Integer.parseInt(callToken.nextToken());
-                dest[i] = Integer.parseInt(callToken.nextToken());
-                start[i] = Integer.parseInt(callToken.nextToken());
-                dur[i] = Integer.parseInt(callToken.nextToken());
+                st = new StringTokenizer(br.readLine());
+                st.nextToken(); // Source : 의미없음
+                st.nextToken(); // Destination : 의미없음
+                callStart[i] = Integer.parseInt(st.nextToken()); // 통화 시작시간
+                callEnd[i] = Integer.parseInt(st.nextToken()) + callStart[i]; // 통화 끝나는 시간 = 통화 시작시간 + 통화시간
             }
-            //3. tapStart, tapDur 입력
+
+            //3. tapStart, tapEnd 입력
             int[] tapStart = new int[M];
-            int[] tapDur = new int[M];
+            int[] tapEnd = new int[M];
             for (int i = 0; i < M; i++) {
-                String tap = br.readLine();
-                StringTokenizer tapToken = new StringTokenizer(tap, " ");
-
-                tapStart[i] = Integer.parseInt(tapToken.nextToken());
-                tapDur[i] = Integer.parseInt(tapToken.nextToken());
+                st = new StringTokenizer(br.readLine());
+                tapStart[i] = Integer.parseInt(st.nextToken()); // 도청 시작시간
+                tapEnd[i] = Integer.parseInt(st.nextToken()) + tapStart[i]; // 도청 끝나는 시간 = 도청 시작시간 + 도청시간
             }
-            int[] result = solution(start, dur, tapStart, tapDur, N, M);
+            // 결과값 출력
+            int[] result = solution(callStart, callEnd, tapStart, tapEnd, N, M);
             for (int i = 0; i < result.length; i++) {
                 System.out.println(result[i]);
             }
