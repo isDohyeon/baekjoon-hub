@@ -1,2 +1,1 @@
-# 백준온라인저지
-백준허브
+Solved.ac : https://solved.ac/profile/hyeondo
