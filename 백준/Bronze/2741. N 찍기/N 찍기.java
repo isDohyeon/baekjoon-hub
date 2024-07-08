@@ -7,41 +7,48 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine().trim());
-        br.close();
-
+        
         BufferedOutputStream bos = new BufferedOutputStream(System.out, 8192);
-        // 버퍼 크기 예측: n * 6 (평균 5자리 숫자 + 줄바꿈 문자) -> 충분히 큰 버퍼
-        byte[] buffer = new byte[n * 6];
+
+        byte[] buffer = new byte[7000000]; // Pre-allocate buffer
         int index = 0;
 
         for (int i = 1; i <= n; i++) {
-            int num = i;
-            int start = index;
-
-            if (num < 10) {
-                buffer[index++] = (byte) ('0' + num);
-            } else {
-                while (num > 0) {
-                    buffer[index++] = (byte) ('0' + num % 10);
-                    num /= 10;
-                }
-                reverse(buffer, start, index - 1);
+            if (i < 10) buffer[index++] = (byte)(i + '0');
+            else if (i < 100) {
+                buffer[index++] = (byte)(i / 10 + '0');
+                buffer[index++] = (byte)(i % 10 + '0');
+            }
+            else if (i < 1000) {
+                buffer[index++] = (byte)(i / 100 + '0');
+                buffer[index++] = (byte)((i / 10) % 10 + '0');
+                buffer[index++] = (byte)(i % 10 + '0');
+            }
+            else if (i < 10000) {
+                buffer[index++] = (byte)(i / 1000 + '0');
+                buffer[index++] = (byte)((i / 100) % 10 + '0');
+                buffer[index++] = (byte)((i / 10) % 10 + '0');
+                buffer[index++] = (byte)(i % 10 + '0');
+            }
+            else if (i < 100000) {
+                buffer[index++] = (byte)(i / 10000 + '0');
+                buffer[index++] = (byte)((i / 1000) % 10 + '0');
+                buffer[index++] = (byte)((i / 100) % 10 + '0');
+                buffer[index++] = (byte)((i / 10) % 10 + '0');
+                buffer[index++] = (byte)(i % 10 + '0');
+            }
+            else {
+                buffer[index++] = '1';
+                buffer[index++] = '0';
+                buffer[index++] = '0';
+                buffer[index++] = '0';
+                buffer[index++] = '0';
+                buffer[index++] = '0';
             }
             buffer[index++] = '\n';
         }
 
         bos.write(buffer, 0, index);
         bos.flush();
-        bos.close();
-    }
-
-    private static void reverse(byte[] buffer, int start, int end) {
-        while (start < end) {
-            byte temp = buffer[start];
-            buffer[start] = buffer[end];
-            buffer[end] = temp;
-            start++;
-            end--;
-        }
     }
 }
