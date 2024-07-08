@@ -1,25 +1,40 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 public class Main {
-    // BufferedReader 입력, StringTokenizer 분리, byte 배열 저장 후 write 출력
+    // 성능 개선 실험
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine().trim());
         
-        byte[] buffer = new byte[10 * n];
+        BufferedOutputStream bos = new BufferedOutputStream(System.out, 8192);
+
+        byte[] buffer = new byte[n * 11];
         int index = 0;
+
         for (int i = 1; i <= n; i++) {
-            String numStr = Integer.toString(i);
-            for (char c : numStr.toCharArray()) {
-                buffer[index++] = (byte) c;
+            int num = i;
+            int digits = 0;
+
+            while (num > 0) {
+                num /= 10;
+                digits++;
             }
+
+            num = i;
+            int start = index + digits - 1;
+            while (num > 0) {
+                buffer[start--] = (byte) ('0' + num % 10);
+                num /= 10;
+            }
+
+            index += digits;
             buffer[index++] = '\n';
         }
-        
-        System.out.write(buffer, 0, index);
+
+        bos.write(buffer, 0, index);
+        bos.flush();
     }
 }
