@@ -1,19 +1,21 @@
 //package implemention;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
-
+    // Scanner 입력, BufferedWriter 출력
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n = Integer.parseInt(br.readLine());
-
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         for (int i = 1; i <= n; i++) {
-            System.out.println(i);
+            bw.write(i + "\n");
         }
+        bw.flush();
+        bw.close();
     }
-    
 }
