@@ -8,7 +8,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine().trim());
         
-        BufferedOutputStream bos = new BufferedOutputStream(System.out, 8192);
+        BufferedOutputStream bos = new BufferedOutputStream(System.out, 32768);
 
         byte[] buffer = new byte[588895]; // Pre-allocate buffer
         int index = 0;
