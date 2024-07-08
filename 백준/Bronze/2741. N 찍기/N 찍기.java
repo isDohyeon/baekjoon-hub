@@ -10,7 +10,7 @@ public class Main {
         
         BufferedOutputStream bos = new BufferedOutputStream(System.out, 8192);
 
-        byte[] buffer = new byte[7000000]; // Pre-allocate buffer
+        byte[] buffer = new byte[588895]; // Pre-allocate buffer
         int index = 0;
 
         for (int i = 1; i <= n; i++) {
