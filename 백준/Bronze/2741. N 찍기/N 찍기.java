@@ -8,9 +8,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine().trim());
-        
-        BufferedOutputStream bos = new BufferedOutputStream(System.out, 32768);
 
+        BufferedOutputStream bos = new BufferedOutputStream(System.out, 32768);
+        writeNumbers(bos, n);
+        bos.flush();
+    }
+
+    public static void writeNumbers(BufferedOutputStream bos, int n) throws IOException {
         byte[] buffer = new byte[588895];
         int index = 0;
 
@@ -47,6 +51,5 @@ public class Main {
         }
 
         bos.write(buffer, 0, index);
-        bos.flush();
     }
 }
