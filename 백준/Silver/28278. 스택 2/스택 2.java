@@ -16,6 +16,9 @@ public class Main {
         for (int i = 0; i < n; i++) {
             String[] input = br.readLine().split(" ");
             appendStackResult(input);
+            if (!input[0].equals("1")) {
+                sb.append('\n');
+            }
         }
         System.out.println(sb);
     }
@@ -27,26 +30,26 @@ public class Main {
                 break;
             case "2":
                 if (!stack.isEmpty()) {
-                    sb.append(stack.pop()).append('\n');
+                    sb.append(stack.pop());
                 } else {
-                    sb.append("-1").append('\n');
+                    sb.append("-1");
                 }
                 break;
             case "3":
-                sb.append(stack.size()).append('\n');
+                sb.append(stack.size());
                 break;
             case "4":
                 if (stack.isEmpty()) {
-                    sb.append("1").append('\n');
+                    sb.append("1");
                 } else {
-                    sb.append("0").append('\n');
+                    sb.append("0");
                 }
                 break;
             case "5":
                 if (!stack.isEmpty()) {
-                    sb.append(stack.peek()).append('\n');
+                    sb.append(stack.peek());
                 } else {
-                    sb.append("-1").append('\n');
+                    sb.append("-1");
                 }
                 break;
         }
