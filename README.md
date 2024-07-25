@@ -1,1 +1,1 @@
-solved algorithm with java
+https://www.acmicpc.net/user/hyeondo
