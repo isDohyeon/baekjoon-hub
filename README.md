@@ -1,1 +1,1 @@
-solved algorithm java code
+solved algorithm with java
