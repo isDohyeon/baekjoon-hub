@@ -1,1 +1,1 @@
-Solved.ac : https://solved.ac/profile/hyeondo
+solved algorithm java code
