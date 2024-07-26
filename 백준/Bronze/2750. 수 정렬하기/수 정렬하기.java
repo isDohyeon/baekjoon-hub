@@ -9,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
 
@@ -18,8 +19,10 @@ public class Main {
             arr[i] = Integer.parseInt(br.readLine());
         }
         Arrays.sort(arr);
+
         for (int i : arr) {
-            System.out.println(i);
+            sb.append(i).append('\n');
         }
+        System.out.print(sb);
     }
 }
