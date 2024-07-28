@@ -24,12 +24,12 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < m; i++) {
             int card = Integer.parseInt(st.nextToken());
-            if (cards.containsKey(card)) {
-                sb.append(cards.get(card)).append(" ");
-            } else {
-                sb.append(0).append(" ");
-            }
+            sb.append(getCardCounts(cards, card)).append(" ");
         }
-        System.out.println(sb);
+        System.out.print(sb);
+    }
+
+    private static int getCardCounts(Map<Integer, Integer> cards, int card) {
+        return cards.getOrDefault(card, 0);
     }
 }
