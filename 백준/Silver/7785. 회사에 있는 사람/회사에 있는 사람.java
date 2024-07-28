@@ -9,15 +9,19 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
-        Map<String, String> logMap = new HashMap<>();
+        Set<String> employee = new HashSet<>();
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String name = st.nextToken();
-            String log = st.nextToken();
-            logMap.put(name, log);
+            //String log = st.nextToken();
+            if (!employee.contains(name)) {
+                employee.add(name);
+            } else {
+                employee.remove(name);
+            }
         }
 
-        List<String> list = getCurrentEmployees(logMap);
+        List<String> list = sortEmployeeDesc(employee);
 
         StringBuilder sb = new StringBuilder();
         for (String s : list) {
@@ -26,17 +30,10 @@ public class Main {
         System.out.print(sb);
     }
 
-    private static List<String> getCurrentEmployees(Map<String, String> logMap) {
-        List<String> list = new ArrayList<>();
-
-        for (Map.Entry<String, String> employee : logMap.entrySet()) {
-            if (employee.getValue().equals("enter")) {
-                list.add(employee.getKey());
-            }
-        }
-
+    private static List<String> sortEmployeeDesc(Set<String> employee) {
+        List<String> list = new ArrayList<>(employee);
         list.sort(Comparator.reverseOrder());
-        
+
         return list;
     }
 }
