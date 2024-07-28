@@ -18,7 +18,7 @@ public class Main {
         int[] compressedCoordinates = getCompressedCoordinates(coordinates, n);
         StringBuilder sb = new StringBuilder();
         for (int result : compressedCoordinates) {
-            sb.append(result + " ");
+            sb.append(result).append(" ");
         }
         System.out.print(sb);
     }
