@@ -13,43 +13,35 @@ public class Main {
             int n = Integer.parseInt(st.nextToken());
             int m = Integer.parseInt(st.nextToken());
 
-            Queue<Document> queue = new LinkedList<>();
-            PriorityQueue<Integer> priorities = new PriorityQueue<>(Collections.reverseOrder());
+            int[] priorities = new int[n];
+            Queue<Integer> queue = new LinkedList<>();
+            PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 
             st = new StringTokenizer(br.readLine());
             for (int i = 0; i < n; i++) {
                 int priority = Integer.parseInt(st.nextToken());
-                queue.offer(new Document(i, priority));
-                priorities.offer(priority);
+                priorities[i] = priority;
+                queue.offer(i);
+                maxHeap.offer(priority);
             }
 
             int printOrder = 0;
             while (!queue.isEmpty()) {
-                Document current = queue.poll();
+                int currentIndex = queue.poll();
 
-                if (current.priority == priorities.peek()) {
-                    priorities.poll();
+                if (priorities[currentIndex] == maxHeap.peek()) {
+                    maxHeap.poll();
                     printOrder++;
-                    if (current.index == m) {
+                    if (currentIndex == m) {
                         sb.append(printOrder).append('\n');
                         break;
                     }
                 } else {
-                    queue.offer(current);
+                    queue.offer(currentIndex);
                 }
             }
         }
 
         System.out.print(sb);
-    }
-
-    static class Document {
-        int index;
-        int priority;
-
-        Document(int index, int priority) {
-            this.index = index;
-            this.priority = priority;
-        }
     }
 }
