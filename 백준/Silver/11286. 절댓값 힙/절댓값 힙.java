@@ -1,4 +1,4 @@
-//package algorithm.datastructure;
+//package algorithm.data_structure;
 
 import java.util.*;
 import java.io.*;
@@ -9,17 +9,14 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        PriorityQueue<Integer> absHeap = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                int abs1 = Math.abs(o1);
-                int abs2 = Math.abs(o2);
+        PriorityQueue<Integer> absHeap = new PriorityQueue<>((o1, o2) -> {
+            int abs1 = Math.abs(o1);
+            int abs2 = Math.abs(o2);
 
-                if (abs1 == abs2) {
-                    return Integer.compare(o1, o2);
-                } else {
-                    return Integer.compare(abs1, abs2);
-                }
+            if (abs1 == abs2) {
+                return Integer.compare(o1, o2);
+            } else {
+                return Integer.compare(abs1, abs2);
             }
         });
 
