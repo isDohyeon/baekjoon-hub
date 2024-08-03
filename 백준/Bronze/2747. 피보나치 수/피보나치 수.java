@@ -9,27 +9,24 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         //StringBuilder sb = new StringBuilder();
 
+        Map<Integer, Long> fiboMap = new HashMap<>();
+
         int n = Integer.parseInt(br.readLine());
 
-        System.out.print(getFibonacciNumber(n));
+        System.out.print(getFibonacciNumber(n, fiboMap));
     }
 
-    private static int getFibonacciNumber(int n) {
-        if (n == 0) {
-            return 0;
-        } else if (n == 1) {
-            return 1;
+    private static long getFibonacciNumber(int n, Map<Integer, Long> fiboMap) {
+        if (n <= 1) {
+            return n;
         }
 
-        int fib = 0;
-        int a = 0;
-        int b = 1;
-
-        for (int i = 2; i <= n; i++) {
-            fib = a + b;
-            a = b;
-            b = fib;
+        if (fiboMap.containsKey(n)) {
+            return fiboMap.get(n);
         }
-        return fib;
+
+        long result = getFibonacciNumber(n - 1, fiboMap) + getFibonacciNumber(n - 2, fiboMap);
+        fiboMap.put(n, result);
+        return result;
     }
 }
