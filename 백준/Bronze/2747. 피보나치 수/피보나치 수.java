@@ -21,13 +21,15 @@ public class Main {
             return 1;
         }
 
-        int[] fib = new int[n + 1];
-        fib[0] = 0;
-        fib[1] = 1;
+        int fib = 0;
+        int a = 0;
+        int b = 1;
 
         for (int i = 2; i <= n; i++) {
-            fib[i] = fib[i - 1] + fib[i - 2];
+            fib = a + b;
+            a = b;
+            b = fib;
         }
-        return fib[n];
+        return fib;
     }
 }
