@@ -24,28 +24,17 @@ public class Main {
             numbers[i] = Integer.parseInt(st.nextToken());
         }
 
-        findSubsequence(0, new ArrayList<>());
-
+        findSubsequence(0, 0);
         System.out.print(count);
     }
 
-    private static void findSubsequence(int start, List<Integer> subsequence) {
-        if (!subsequence.isEmpty() && calculateSum(subsequence) == S) {
+    private static void findSubsequence(int start, int currentSum) {
+        if (start > 0 && currentSum == S) {
             count++;
         }
 
         for (int i = start; i < N; i++) {
-            subsequence.add(numbers[i]);
-            findSubsequence(i + 1, subsequence);
-            subsequence.remove(subsequence.size() - 1);
+            findSubsequence(i + 1, currentSum + numbers[i]);
         }
-    }
-
-    private static int calculateSum(List<Integer> subsequence) {
-        int sum = 0;
-        for (Integer i : subsequence) {
-            sum += i;
-        }
-        return sum;
     }
 }
