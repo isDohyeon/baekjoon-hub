@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
 
-    private static int N;
+    private static final int N = 5;
     private static int[][] board;
     private static int[] dx = {0, 1, 0, -1};
     private static int[] dy = {-1, 0, 1, 0};
@@ -14,7 +14,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-        N = 5;
         board = new int[N][N];
 
         for (int i = 0; i < N; i++) {
