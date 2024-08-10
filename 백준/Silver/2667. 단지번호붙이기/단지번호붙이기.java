@@ -14,7 +14,7 @@ public class Main {
     private static int[] dy = {-1, 1, 0, 0};
 
     private static int count;
-    private static List<Integer> groups = new ArrayList<>();
+    private static List<Integer> result = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,42 +36,34 @@ public class Main {
                 if (!visited[i][j] && map[i][j] == '1') {
                     visited[i][j] = true;
 
-                    bfs(i, j);
+                    dfs(i, j);
 
-                    groups.add(count);
+                    result.add(count);
                     count = 0;
                 }
             }
         }
 
-        groups.sort(Comparator.naturalOrder());
+        result.sort(Comparator.naturalOrder());
 
-        sb.append(groups.size()).append('\n');
-        for (Integer groupSize : groups) {
+        sb.append(result.size()).append('\n');
+        for (Integer groupSize : result) {
             sb.append(groupSize).append('\n');
         }
 
         System.out.print(sb);
     }
 
-    private static void bfs(int y, int x) {
-        Queue<int[]> home = new LinkedList<>();
-        home.offer(new int[]{y, x});
+    private static void dfs(int y, int x) {
+        count++;
 
-        while (!home.isEmpty()) {
-            int[] current = home.poll();
-            count++;
-            int curY = current[0];
-            int curX = current[1];
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
 
-            for (int i = 0; i < 4; i++) {
-                int nx = curX + dx[i];
-                int ny = curY + dy[i];
-
-                if (isValidHome(ny, nx)) {
-                    visited[ny][nx] = true;
-                    home.offer(new int[]{ny, nx});
-                }
+            if (isValidHome(ny, nx)) {
+                visited[ny][nx] = true;
+                dfs(ny, nx);
             }
         }
     }
@@ -80,3 +72,4 @@ public class Main {
         return ny >= 0 && nx >= 0 && ny < N && nx < N && map[ny][nx] == '1' && !visited[ny][nx];
     }
 }
+
