@@ -34,10 +34,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (!visited[i][j] && map[i][j] == '1') {
-                    visited[i][j] = true;
-
                     dfs(i, j);
-
                     result.add(count);
                     count = 0;
                 }
@@ -55,6 +52,7 @@ public class Main {
     }
 
     private static void dfs(int y, int x) {
+        visited[y][x] = true;
         count++;
 
         for (int i = 0; i < 4; i++) {
@@ -62,7 +60,6 @@ public class Main {
             int ny = y + dy[i];
 
             if (isValidHome(ny, nx)) {
-                visited[ny][nx] = true;
                 dfs(ny, nx);
             }
         }
