@@ -9,16 +9,21 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    // 주가의 상승과 하락의 스트릭을 기록하는 변수
     private static int risingStreak = 0;
     private static int fallingStreak = 0;
 
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
              BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out))) {
+            // 1. 현금 입력
             int cash = Integer.parseInt(br.readLine());
+            // 2. 준현, 성민 객체 생성
             Trader junhyeon = new Trader(cash);
             Trader seongmin = new Trader(cash);
+            // 3. 주가 입력
             StringTokenizer st = new StringTokenizer(br.readLine());
+            // 주가의 기본값은 -1 (첫 날의
             int lastDayStock = -1;
             for (int i = 0; i < 14; i++) {
                 int todayStock = Integer.parseInt(st.nextToken());
@@ -41,16 +46,16 @@ public class Main {
     private static void updateStreak(int todayStock, int lastDayStock) {
         if (todayStock > lastDayStock) {
             risingStreak++;
-            fallingStreak = 0; 
+            fallingStreak = 0;
             return;
         }
-        if (todayStock < lastDayStock) { 
+        if (todayStock < lastDayStock) {
             fallingStreak++;
-            risingStreak = 0; 
+            risingStreak = 0;
             return;
         }
-        risingStreak = 0;
-        fallingStreak = 0;
+//        risingStreak = 0;
+//        fallingStreak = 0;
     }
 
     private static String configWinner(int jhAssets, int smAssets) {
@@ -87,14 +92,14 @@ class Trader {
     }
 
     public void buy(int stockValue) {
-        int buyAmount = cash / stockValue; 
+        int buyAmount = cash / stockValue;
         cash -= buyAmount * stockValue;
-        shares += buyAmount;        
+        shares += buyAmount;
     }
 
     public void sell(int stockValue) {
-        cash += shares * stockValue; 
-        shares = 0;                 
+        cash += shares * stockValue;
+        shares = 0;
     }
 
     public int getCash() {
@@ -102,6 +107,6 @@ class Trader {
     }
 
     public int getTotalAssets(int stockValue) {
-        return cash + (shares * stockValue); 
+        return cash + (shares * stockValue);
     }
 }
