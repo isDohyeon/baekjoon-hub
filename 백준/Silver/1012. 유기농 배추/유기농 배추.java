@@ -1,7 +1,14 @@
-//package algorithm.dfs_bfs;
+//package week3;
 
-import java.io.*;
-import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -17,7 +24,7 @@ public class Main {
 
     private static int count;
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         /**
          * 1. 테스트 케이스 입력
          * 2. 배추밭, 배추 개수 입력
@@ -26,6 +33,7 @@ public class Main {
          * 5. bfs 끝날 때마다 카운트 증가
          */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
 
         int T = Integer.parseInt(br.readLine());
@@ -54,11 +62,10 @@ public class Main {
                     }
                 }
             }
-            sb.append(count).append('\n');
+            bw.write(count + "\n");
             count = 0;
         }
-
-        System.out.print(sb);
+        bw.close();
     }
 
     private static void bfs(int b, int a) {
