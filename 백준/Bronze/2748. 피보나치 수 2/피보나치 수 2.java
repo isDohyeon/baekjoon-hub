@@ -1,33 +1,37 @@
-//package algorithm.dynamic_programming;
+//package week4;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Main {
 
-    private static Map<Integer, Long> fiboMap = new HashMap<>();
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //StringBuilder sb = new StringBuilder();
-
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
 
-        System.out.print(getFibonacciNumber(n));
+        bw.write(String.valueOf(getFibonacciNumber(n)));
+        bw.close();
     }
 
     private static long getFibonacciNumber(int n) {
-        if (n <= 1) {
-            return n;
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
         }
 
-        if (fiboMap.containsKey(n)) {
-            return fiboMap.get(n);
-        }
+        long[] fib = new long[n + 1];
+        fib[0] = 0;
+        fib[1] = 1;
 
-        long result = getFibonacciNumber(n - 1) + getFibonacciNumber(n - 2);
-        fiboMap.put(n, result);
-        return result;
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+        return fib[n];
     }
 }
