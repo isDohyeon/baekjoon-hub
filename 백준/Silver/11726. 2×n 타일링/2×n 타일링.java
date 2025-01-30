@@ -1,33 +1,38 @@
-//package algorithm.dynamic_programming;
+//package week4;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        System.out.print(solution(N));
+        int N = Integer.parseInt(br.readLine());
+        
+        int result = getResult(N);
+        
+        bw.write(String.valueOf(result));
+        bw.close();
     }
 
-    private static int solution(int N) {
+    private static int getResult(int N) {
         if (N == 1) {
             return 1;
-        } else if (N == 2) {
+        }
+        if (N == 2) {
             return 2;
         }
-
         int[] dp = new int[N + 1];
         dp[1] = 1;
         dp[2] = 2;
-
         for (int i = 3; i <= N; i++) {
             dp[i] = (dp[i - 1] + dp[i - 2]) % 10_007;
         }
-
-
         return dp[N];
     }
 }
